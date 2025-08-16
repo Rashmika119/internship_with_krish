@@ -4,11 +4,18 @@ import java.util.Scanner;
 
 
 public class Main {
+    private static final int ALPHABET_SIZE=26;
+    private static final char FIRST_LETTER='A';
+
+    private static final int HOT=3;
+    private static final int WARM=6;
+    private static final int COLD=9;
+
     public static void main(String[] args) {
 
         Random random=new Random();
-        int number=random.nextInt(26);
-        char generatedLetter =(char)(number+'A');//A-Ascii value 65
+        int number=random.nextInt(ALPHABET_SIZE);
+        char generatedLetter =(char)(number+FIRST_LETTER);//A-Ascii value 65
 
         boolean isGuessCorrect=false;
         int count=0;
@@ -18,12 +25,24 @@ public class Main {
             System.out.println("Guess the character: ");
             try {
                 String inputCharacter = scan.nextLine().trim();
-                int arrayLength = inputCharacter.length();
+
+                if (inputCharacter.isEmpty()){
+                    System.out.println("Empty input.Please enter a letter");
+                    continue;
+                }
+
+                if(inputCharacter.length()>1){
+                    System.out.println("Please enter exactly one character");
+                    continue;
+                }
 
                 char userGuessedLetter = inputCharacter.charAt(0);
-                boolean isAlphabet = Character.isLetter(userGuessedLetter);
+                if(!Character.isLetter(userGuessedLetter)){
+                    System.out.println("Invalid input.Please enter valid alphabet character");
+                    continue;
+                };
 
-                if (arrayLength == 1 && isAlphabet) {
+
                     count++;
                     char validUserGuessedLetter = inputCharacter.charAt(0);
                     char inputInUpperCase = Character.toUpperCase(validUserGuessedLetter);
@@ -33,21 +52,18 @@ public class Main {
                     if (difference == 0) {
                         isGuessCorrect=true;
                         System.out.println("You guessed the character " + generatedLetter + " ,after " + count + " trial. welldone!");
-                    } else if (difference <= 3) {
+                    } else if (difference <= HOT) {
                         System.out.println("Hot...You are So close..Try again!");
 
-                    } else if ((difference<=6)){
+                    } else if ((difference<=WARM)){
                         System.out.println("Warm...You are close..Try again!");
 
-                    } else if ((difference<=9) ) {
+                    } else if ((difference<=COLD) ) {
                         System.out.println("Cold...You are bit away the track..Try again!");
                     } else {
                         System.out.println("Ice...You are out of there..try again");
                     }
 
-                } else {
-                    System.out.println("Invalid input.Enter a valid input character");
-                }
             }catch (Exception e) {
                 System.out.println("Invalid input...message: "+e.getMessage());
             }
