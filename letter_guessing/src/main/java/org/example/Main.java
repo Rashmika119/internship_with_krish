@@ -44,8 +44,7 @@ public class Main {
 
 
                     count++;
-                    char validUserGuessedLetter = inputCharacter.charAt(0);
-                    char inputInUpperCase = Character.toUpperCase(validUserGuessedLetter);
+                    char inputInUpperCase = Character.toUpperCase(userGuessedLetter);
 
                     int difference=Math.abs(inputInUpperCase-generatedLetter);
 
