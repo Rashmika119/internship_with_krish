@@ -34,7 +34,6 @@ export class WeatherService {
 
   //get weather forcast for next 7 days from start date
   async getWeatherForSevenDays(startDate: Date, location: string): Promise<Weather[]> {
-    console.log("======================")
     const delay=Number(process.env.WEATHER_DELAY_MS) || 0;
     const failRate=Number(process.env.WEATHER_FAIL_RATE) || 0;
 

@@ -24,23 +24,25 @@ export class CircuitBreaker<T> {
 
     async fire(): Promise<T> {
         const now = Date.now();
+        console.log("---------------------------------------------------------")
         console.log(`----breaker state ${CircuitBreaker.state}`)
         console.log(`-------last failure time ${CircuitBreaker.lastFailureTime}`)
         console.log(`-------failures ${CircuitBreaker.failures}`)
+        console.log(`-------success ${CircuitBreaker.success}`)
+        console.log("---------------------------------------------------------")
         if (CircuitBreaker.state == 'OPEN') {
             if (now - CircuitBreaker.lastFailureTime > this.options.cooldownTime) {
                 CircuitBreaker.state = 'HALF_OPEN';
                 CircuitBreaker.success = 0;
                 CircuitBreaker.failures= 0;
-                console.log("success requests limit reached | request state OPEN==>HALF_OPEN");
+                console.log("success requests limit reached");
+                console.log("request state OPEN == >HALF_OPEN")
             } else {
-                console.log("haven't completed the cooldown time yet");
                 return this._fallback();
             }
         }
         try {
             const result = await this._action();
-            console.log(`----result ${result}`)
             this.recordSuccess();
             return result;
 
@@ -48,15 +50,16 @@ export class CircuitBreaker<T> {
             this.recordFailure();
             console.log("failure updated");
             if (CircuitBreaker.state === 'HALF_OPEN' && CircuitBreaker.failures>=this.options.halfOpenRequests) {
-                CircuitBreaker.state = 'OPEN';//add the condition to check the threshold
+                CircuitBreaker.state = 'OPEN';
                 CircuitBreaker.lastFailureTime = now;
-                console.log("testing requests failed | request state HALF_OPEN==>OPEN");
+                console.log("testing requests failed");
+                console.log("| request state HALF_OPEN ==> OPEN")
             }
             if (CircuitBreaker.state === 'CLOSED' && this.shouldOpen()) {
                 CircuitBreaker.state = 'OPEN';
-                console.log("update last failure time from closed state")
                 CircuitBreaker.lastFailureTime = now;
-                console.log('Breaker opened, state CLOSED==>OPEN');
+                console.log('Breaker opened');
+                console.log("| state CLOSED ==> OPEN");
             }
             return this._fallback();
 
@@ -70,12 +73,12 @@ export class CircuitBreaker<T> {
         CircuitBreaker.success++;
         if (CircuitBreaker.state === 'HALF_OPEN' && CircuitBreaker.success >= this.options.halfOpenRequests) {
             CircuitBreaker.state = 'CLOSED';
-            console.log('Breaker closed, state HALF_OPEN=>CLOSED');
+            console.log('Breaker closed');
+            console.log("| state HALF_OPEN ==> CLOSED");
         }
     }
 
     private recordFailure() {
-        console.log("failure value try to update-----")
         CircuitBreaker.failures++;
     }
 

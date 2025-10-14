@@ -28,6 +28,7 @@ export class ScatterService {
   }
 
     //---------------version 1 -----------------
+    //Include weather and hotel services
 
   async getFlightAndHotelInfo(startDestination: string, endDestination: string, departTime: Date) {
     if (!startDestination || !endDestination || !departTime) {
@@ -71,6 +72,8 @@ export class ScatterService {
 
   }
   //---------------version 2-----------------
+  // added weather service with flight and hotel sevice
+  // circuit breaker for weather service
 
   async getInfoWithWeather(startDestination: string, endDestination: string, arriveTime: Date) {
     if (!startDestination || !endDestination || !arriveTime) {
@@ -124,7 +127,6 @@ export class ScatterService {
         [Promise.all([flightPromise, hotelPromise, weatherPromise]), new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), TOTATL_BUDGET))]
       );
 
-      console.log("----------", results)
 
       if (Array.isArray(results)) {
         [flights, hotels, weather] = results;

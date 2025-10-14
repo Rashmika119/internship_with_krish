@@ -34,7 +34,6 @@ export class WeatherController {
   @Get('/seven-days/:date/:location')
   getSeventDayForcast(@Param('date') date: string, @Param('location') location: string) {
     const delay:number = Number(process.env.WEATHER_DELAY_MS) 
-    console.log("--------------delay",delay)
     const startDate = new Date(date);
     return new Promise(resolve => {
       setTimeout(() => {
