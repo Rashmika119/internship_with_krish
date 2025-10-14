@@ -1,0 +1,19 @@
+{
+  "name": "flight",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "nest start",
+    "start:dev": "nest start flight --watch"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "@nestjs/typeorm": "^11.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0",
+    "sqlite3": "^5.1.6",
+    "typeorm": "^0.3.27",
+    "uuid": "^13.0.0"
+  }
+}
