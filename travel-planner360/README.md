@@ -3,9 +3,12 @@ Rollout Plan --API Version Migration (V1 -->V2)
 
 🌟 Stratergy: Canary Deployement
 
-📌Deploy version 1 and version 2 side by side /n
+📌Deploy version 1 and version 2 side by side 
+
 📌Gradual traffic shifting to v2
+
 📌When v2 reaches 95% traffic, v1 will be removed
+
 📌Shutdown date for v1: 2025-12-30
 
 🌟 Version Overview
