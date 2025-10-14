@@ -33,13 +33,9 @@ export class WeatherController {
   }
   @Get('/seven-days/:date/:location')
   getSeventDayForcast(@Param('date') date: string, @Param('location') location: string) {
-    const delay:number = Number(process.env.WEATHER_DELAY_MS) 
     const startDate = new Date(date);
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve( this.weatherService.getWeatherForSevenDays(startDate, location));
-      }, delay);
-    });
+    return this.weatherService.getWeatherForSevenDays(startDate, location);
+      
   }
 
   @Delete('/:location')
@@ -47,5 +43,12 @@ export class WeatherController {
     @Param() location: string
   ) {
     this.weatherService.deleteWeather(location)
+  }
+
+  @Put('/updateDelay')
+  async updateWeather(@Body('delay') delayValue:number
+  ){
+    await this.weatherService.delayUpdate(delayValue)
+    return `delay updated to ${delayValue}`
   }
 }

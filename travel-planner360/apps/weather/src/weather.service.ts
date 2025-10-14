@@ -3,6 +3,7 @@ import { Weather } from './weather.entity';
 import { Between, Repository } from 'typeorm';
 import { weatherSearchDto } from './weatherSearch.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { delay } from 'rxjs';
 
 @Injectable()
 export class WeatherService {
@@ -32,17 +33,20 @@ export class WeatherService {
     return weather;
   }
 
+    private delay=Number(process.env.WEATHER_DELAY_MS) || 0;
+    private failRate=Number(process.env.WEATHER_FAIL_RATE) || 0;
+
+
   //get weather forcast for next 7 days from start date
   async getWeatherForSevenDays(startDate: Date, location: string): Promise<Weather[]> {
-    const delay=Number(process.env.WEATHER_DELAY_MS) || 0;
-    const failRate=Number(process.env.WEATHER_FAIL_RATE) || 0;
 
-    if(delay>0){
+
+    if(this.delay>0){
       console.log("delay happens")
-      await new Promise(res=>setTimeout(res,delay));
+      await new Promise(res=>setTimeout(res,this.delay));
     }
 
-    if(Math.random() < failRate){
+    if(Math.random() < this.failRate){
       console.log("random failure generated");
       throw new Error('Simulated weather failure');
     }
@@ -105,6 +109,10 @@ export class WeatherService {
       throw new NotFoundException(`Weather in ${weather} ,is not found`);
     }
     return weather;
+  }
+
+  async delayUpdate(delayValue:number){
+    this.delay=delayValue;
   }
 
 }
