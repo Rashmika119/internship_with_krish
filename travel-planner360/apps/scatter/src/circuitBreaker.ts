@@ -18,7 +18,7 @@ export class CircuitBreaker<T> {
             fallback: () => T
         },
     ) {
-        this._action = action; //check wheather endpoint correctly executed
+        this._action = action; 
         this._fallback = options.fallback;
     }
 

@@ -42,7 +42,7 @@ export class WeatherService {
       await new Promise(res=>setTimeout(res,delay));
     }
 
-    if(0.6 < failRate){
+    if(Math.random() < failRate){
       console.log("random failure generated");
       throw new Error('Simulated weather failure');
     }
