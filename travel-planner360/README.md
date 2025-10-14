@@ -65,23 +65,34 @@ Rollout Plan --API Version Migration (V1 -->V2)
 💡 Phase 1 -Parallel Deployemnet 
 
 📌Deploy version 1 and version 2 side by side
+
 📌Expose V2 endpoints for new consumers
+
 📌No impact on existing consumers.So zero distruption for v1 consumers
+
 📌Documentation updated to show v2 availability
 
 💡 Phase 2 - Traffic Monitoring and Canary start
 
 📌Here test the v2 in production with real traffic.
+
 📌Beging routing a small trffic to v2 (5-10%)
+
 📌Select a specific user group (ex:like premium users)
+
 📌Then can give X header for them (ex:X-API-Version: 2)
+
 📌First we can redirect them to version 2 and give them the response in version 1 structure
+
 📌when 60% of them reach them give default values for the consumers that use version1 📌although now to adapt them for version 2 response structure
+
 📌Key Monitoring:
+
 - Error rate
 - Latency
 - Weather service failure
 - Response consistency
+  
 📌Rollback to v1 immediately to va if an instability occurs
 
 💡 Phase 3 - Gradually trffic shift
@@ -99,8 +110,11 @@ Step 4	          75%	            25%
 💡 Phase 4 – Make v2 Default (95% Traffic)
 
 📌v2 handles almost all requests
+
 📌All new integrations use v2 only
+
 📌v1 remains for legacy consumers
+
 📌Deprecation warning period begins
 
 - Example deprecation header:
@@ -112,12 +126,17 @@ Use: /v2/trips/search
 💡 Phase 5 – Sunset & Retirement of v1
 
 📌Triggered when:
+
 - v2 reaches 95% adoption
 - Most consumers migrated
+  
 📌v1 shutdown date: 2025-12-30
+
 📌After shutdown, v1 endpoints may return:
+
 - 410 Gone OR
 - 404 Not Found
+  
 📌No protocol-level redirect or request transformation
 
 
