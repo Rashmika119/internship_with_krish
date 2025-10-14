@@ -20,12 +20,9 @@
     "test:e2e": "jest --config ./apps/travel-planner360/test/jest-e2e.json",
     "start:flight": "nest start flight --watch",
     "start:hotel": "nest start hotel --watch",
-    "start:scatter": "nest start scatter --watch",
-    "start:chain": "nest start chain --watch",
-    "start:branch": "nest start branch --watch",
     "start:event": "nest start event --watch",
     "start:weather": "nest start weather --watch",
-    "start:metrics": "nest start metrics --watch"
+    "start:aggregator": "nest start aggregator --watch"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",

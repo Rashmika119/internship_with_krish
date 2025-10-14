@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { ChainModule } from './../src/chain.module';
+import { AggregatorModule } from './../src/aggregator.module';
 
-describe('ChainController (e2e)', () => {
+describe('AggregatorController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [ChainModule],
+      imports: [AggregatorModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();

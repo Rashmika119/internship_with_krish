@@ -64,8 +64,6 @@ export class CircuitBreaker<T> {
             return this._fallback();
 
         }
-
-
     }
 
 

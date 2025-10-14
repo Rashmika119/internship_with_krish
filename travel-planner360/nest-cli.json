@@ -7,6 +7,15 @@
     "deleteOutDir": true
   },
   "projects": {
+    "aggregator": {
+      "type": "application",
+      "root": "apps/aggregator",
+      "entryFile": "main",
+      "sourceRoot": "apps/aggregator/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/aggregator/tsconfig.app.json"
+      }
+    },
     "branch": {
       "type": "application",
       "root": "apps/branch",

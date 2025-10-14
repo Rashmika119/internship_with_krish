@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { ScatterModule } from './scatter.module';
+import { AggregatorModule } from './aggregator.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(ScatterModule);
+  const app = await NestFactory.create(AggregatorModule);
   await app.listen(process.env.port ?? 5000);
 }
 bootstrap();

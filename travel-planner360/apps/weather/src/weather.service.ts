@@ -3,7 +3,8 @@ import { Weather } from './weather.entity';
 import { Between, Repository } from 'typeorm';
 import { weatherSearchDto } from './weatherSearch.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { delay } from 'rxjs';
+
+require('dotenv').config();
 
 @Injectable()
 export class WeatherService {

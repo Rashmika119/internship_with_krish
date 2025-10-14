@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const axios=require('axios');
 
 const apiVersion=process.env.API_VERSION || 1;
