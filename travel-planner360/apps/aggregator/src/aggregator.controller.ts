@@ -1,15 +1,14 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AggregatorService } from './aggregator.service';
 
-//import { MetricsService } from 'apps/metrics/src/metrics.service';
+
 
 
 @Controller()
 export class AggregatorController {
-  private v1Count = 0;
-  private v2Count = 0;
+
   constructor(private readonly aggregatorService: AggregatorService,
-    //private readonly metricsService:MetricsService
+   
   ) { }
 
   //-----------------------------version 1-------------------
@@ -22,9 +21,7 @@ export class AggregatorController {
     @Query('arriveTime') arriveTime: string,
   ) {
 
-    this.v1Count++;
     
-
     //convert date string to date as @query decorator gives strings
     const arriveDate = new Date(arriveTime);
     return this.aggregatorService.getFlightAndHotelInfo(startDestination, endDestination, arriveDate);
@@ -40,8 +37,8 @@ export class AggregatorController {
     @Query('endDestination') endDestination: string,
     @Query('arriveTime') arriveTime: string,
   ) {
-    this.v2Count++;
-    //await this.metricsService.increment('v2');
+  
+   
     //convert date string to date as @query decorator gives strings
     const arriveDate = new Date(arriveTime);
     return this.aggregatorService.getInfoWithWeather(startDestination, endDestination, arriveDate);
@@ -59,7 +56,7 @@ export class AggregatorController {
         @Query('endDestination') endDestination:string,
         @Query('arriveTime') arriveTime:string,
   ){
-       //await this.metricsService.increment('v1')
+       
 
         const arriveDate=new Date(arriveTime);
         return this.aggregatorService.getBudgetRoute(startDestination,endDestination,arriveDate);
