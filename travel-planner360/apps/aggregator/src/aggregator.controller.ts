@@ -18,13 +18,12 @@ export class AggregatorController {
   async getHotelInfo(
     @Query('startDestination') startDestination: string,
     @Query('endDestination') endDestination: string,
-    @Query('arriveTime') arriveTime: string,
+    @Query('arriveTime') departTime?: string,
   ) {
 
     
-    //convert date string to date as @query decorator gives strings
-    const arriveDate = new Date(arriveTime);
-    return this.aggregatorService.getFlightAndHotelInfo(startDestination, endDestination, arriveDate);
+   const departDate = departTime ? new Date(departTime) : undefined;
+    return this.aggregatorService.getFlightAndHotelInfo(startDestination, endDestination, departDate);
   }
 
 
